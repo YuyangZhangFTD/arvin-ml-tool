@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.arvin</groupId>
+  <artifactId>arvin-spark-tools</artifactId>
+  <version>2.0</version>
+  <build>
+    <sourceDirectory>src/main/scala/</sourceDirectory>
+    <testSourceDirectory>src/test/scala/</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <version>2.15.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer>
+                  <resource>reference.conf</resource>
+                </transformer>
+                <transformer>
+                  <manifestEntries>
+                    <Main-Class>com.arvin.MainApp</Main-Class>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+    <repository>
+      <id>UK Central</id>
+      <url>http://uk.maven.org/maven2</url>
+    </repository>
+    <repository>
+      <id>Akka repository</id>
+      <url>http://repo.akka.io/releases</url>
+    </repository>
+    <repository>
+      <id>Twitter repository</id>
+      <url>http://maven.twttr.com</url>
+    </repository>
+  </repositories>
+  <properties>
+    <scala.version>2.11</scala.version>
+    <hadoop.version>2.7.2</hadoop.version>
+    <hive.version>1.2.1</hive.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <spark.version>2.4.3</spark.version>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+</project>
+

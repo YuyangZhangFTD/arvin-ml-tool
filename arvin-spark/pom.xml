@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.arvin</groupId>
+    <artifactId>arvin-spark-tools</artifactId>
+    <version>2.0</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <hadoop.version>2.7.2</hadoop.version>
+        <hive.version>1.2.1</hive.version>
+        <!-- spark 3.0 need scala 2.12 -->
+        <scala.version>2.11</scala.version>
+        <!-- <spark.version>3.0.0</spark.version> -->
+        <spark.version>2.4.3</spark.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>UK Central</id>
+            <url>http://uk.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>Akka repository</id>
+            <url>http://repo.akka.io/releases</url>
+        </repository>
+        <repository>
+            <id>Twitter repository</id>
+            <url>http://maven.twttr.com</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <sourceDirectory>src/main/scala/</sourceDirectory>
+        <testSourceDirectory>src/test/scala/</testSourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <version>2.15.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>reference.conf</resource>
+                                </transformer>
+
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>com.arvin.MainApp</Main-Class>
+                                    </manifestEntries>
+                                </transformer>
+
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-cli</artifactId>
+            <version>${hive.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+        <!-- spark-mllib >= 2.4-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+            <!--            <scope>provided</scope>-->
+        </dependency>
+
+        <!--my own dependency-->
+        <!--        https://mvnrepository.com/artifact/ml.dmlc/xgboost4j-spark_2.12/1.0.0-->
+        <dependency>
+            <groupId>ml.dmlc</groupId>
+            <artifactId>xgboost4j-spark_${scala.version}</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--        https://mvnrepository.com/artifact/com.microsoft.ml.spark/mmlspark-->
+        <dependency>
+            <groupId>com.microsoft.ml.spark</groupId>
+            <artifactId>mmlspark_2.11</artifactId>
+            <version>0.18.1</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.tensorflow</groupId>-->
+        <!--            <artifactId>spark-tensorflow-connector_2.11</artifactId>-->
+        <!--            <version>1.15.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.json4s</groupId>-->
+        <!--            <artifactId>json4s-jackson_${scala.version}</artifactId>-->
+        <!--            <version>3.6.7</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>joda-time</groupId>-->
+        <!--            <artifactId>joda-time</artifactId>-->
+        <!--            <version>2.7</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.joda</groupId>-->
+        <!--            <artifactId>joda-convert</artifactId>-->
+        <!--            <version>1.7</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.thrift</groupId>-->
+        <!--            <artifactId>libthrift</artifactId>-->
+        <!--            <version>0.9.3</version>-->
+        <!--        </dependency>-->
+    </dependencies>
+
+</project>
