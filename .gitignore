@@ -133,3 +133,14 @@ music/input/
 
 # jupyter notebook
 *.ipynb_checkpints/
+
+# vscode
+*.vscode
+
+# meta
+*.metals
+
+# dataset
+*.gz
+*.gzip
+
