@@ -144,3 +144,8 @@ music/input/
 *.gz
 *.gzip
 
+# jupyter
+*.ipynb
+
+# nohup
+*.out
