@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 eval_flag = 0
+model_name = "slearner_lgb"
 
 # 超参数
 EVAL_SET_RATIO = 0.2
@@ -45,7 +46,7 @@ data_test = pd.read_csv(f"./criteo-uplift/te_{eval_flag}.gz")
 data_lgb_train = lgb.Dataset(data_train[FEATURE_COLS + [IS_TREAT_COL]], data_train[LABEL_COL])
 data_lgb_eval = lgb.Dataset(data_eval[FEATURE_COLS + [IS_TREAT_COL]], data_eval[LABEL_COL])
 
-# S-learner 训练
+# S-Learner LGB 训练
 s_learner_lgb = lgb.train(
     params=LGB_MODEL_PARAMETER,
     train_set=data_lgb_train,
@@ -54,6 +55,9 @@ s_learner_lgb = lgb.train(
 )
 
 # 产出预测值 + 评估
+plt.Figure()
+plt.plot([0, 1], [0, 1], label='rand')
+result_str = []
 for _df, _name in zip([data_train, data_eval, data_test], ['train', 'eval', 'test']):
     _df['_is_trt'] = 1
     _df['_is_ctl'] = 0
@@ -63,12 +67,13 @@ for _df, _name in zip([data_train, data_eval, data_test], ['train', 'eval', 'tes
 
     _df, qini_score = cal_qini_score(_df, score_col='_ite', treatment_col=IS_TREAT_COL, outcome_col=LABEL_COL)
 
-    plt.plot(_df['percentile'], _df['normal_total_lift'], label=f"s-learner")
-    plt.plot([0, 1], [0, 1], label='rand')
-    plt.legend()
-    plt.xlabel('percentile')
-    plt.ylabel(f'normalized uplift ({LABEL_COL})')
-    plt.title(f's-learner_{_name}: {round(qini_score, 4)}')
-    plt.show()
+    plt.plot(_df['percentile'], _df['normal_total_lift'], label=f"{model_name}")
+    result_str.append(f"{_name}={round(qini_score, 4)}")
 
-data_test.to_csv(f"./criteo-uplift/pred_{eval_flag}.gz", index=None, compression='gzip')
+plt.legend()
+plt.xlabel('percentile')
+plt.ylabel(f'normalized uplift ({LABEL_COL})')
+plt.title(f"{model_name}: {','.join(result_str)}")
+plt.savefig(f"{model_name}.png")
+plt.show()
+data_test.to_csv(f"./criteo-uplift/pred_{eval_flag}_{model_name}.gz", index=None, compression='gzip')

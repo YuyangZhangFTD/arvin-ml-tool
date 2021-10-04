@@ -143,6 +143,7 @@ music/input/
 # dataset
 *.gz
 *.gzip
+*.zip
 
 # jupyter
 *.ipynb

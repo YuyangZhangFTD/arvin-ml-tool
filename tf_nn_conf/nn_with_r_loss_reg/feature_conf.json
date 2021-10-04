@@ -1,0 +1,106 @@
+{
+  "features": [
+    {
+      "name": "f0",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [12.616364906986496,13.9266187814487,15.60030870282086,18.127020378478647,20.69400751481319,21.92341332573701,22.384536944499786,22.77078856342354,23.417073178701788,24.00947882435343,24.43645865232792,24.833312460690188,25.567772767253768,25.99092574193438,26.311866483975468,26.74525510669564],
+      "embedding_size": 2
+    },
+    {
+      "name": "f1",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [10.059654474774549,16.34418683323554],
+      "embedding_size": 2
+    },
+    {
+      "name": "f2",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [8.214382844395335,8.27260882692554,8.381599838631448,8.507244104991239,8.628523610633787,8.723335432323797,8.814978514462675,8.88763752435083,8.950724427563095,9.004230229484756,9.051961945804948],
+      "embedding_size": 2
+    },
+    {
+      "name": "f3",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [-8.39838674285089,0.9738407885786832,2.587543491438713,3.907661871341429,4.679881620097284],
+      "embedding_size": 2
+    },
+    {
+      "name": "f4",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [10.280525225748212,21.12350773431505],
+      "embedding_size": 2
+    },
+    {
+      "name": "f5",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [-9.011891520498516,3.01306434186306,4.115453421277861],
+      "embedding_size": 2
+    },
+    {
+      "name": "f6",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [-31.429783775633886,-13.353454565674014,-10.98752826991412,-9.2387560212969,-7.822229154977576,-6.699321423701454,-5.576413692425332,-5.116671866233181,-3.99376413495706,-3.2821094810628875,-2.411114577488788,-1.288206846212666,0.294442711255606],
+      "embedding_size": 2
+    },
+    {
+      "name": "f7",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [4.833814577796811,6.045297096398672,11.998400591725757],
+      "embedding_size": 2
+    },
+    {
+      "name": "f8",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [3.63510661177053,3.806308586010733,3.8428279258297415,3.8709699364788666,3.8928533772384566,3.910791936852483,3.9272539577771166,3.94371597870175,3.9553959684262416,3.971857989350875],
+      "embedding_size": 2
+    },
+    {
+      "name": "f9",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [13.190055934673358,16.226044033102564,18.38011186934672,25.24099262342832,33.71255596226026,75.29501735734412],
+      "embedding_size": 2
+    },
+    {
+      "name": "f10",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [5.300374864042156,6.473917229316857],
+      "embedding_size": 2
+    },
+    {
+      "name": "f11",
+      "feature_type": "embedding",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "bucket_boundaries": [-1.383940669255639,-0.1686792210005612],
+      "embedding_size": 2
+    },
+        {
+      "name": "treatment",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float"
+    }
+  ]
+}

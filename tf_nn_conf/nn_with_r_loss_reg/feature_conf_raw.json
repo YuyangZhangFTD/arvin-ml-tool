@@ -1,0 +1,142 @@
+{
+  "features": [
+    {
+      "name": "f0",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 19.620297,
+        "std": 5.377464
+      }
+    },
+    {
+      "name": "f1",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 10.069977,
+        "std": 0.104756
+      }
+    },
+    {
+      "name": "f2",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 8.446582,
+        "std": 0.299316
+      }
+    },
+    {
+      "name": "f3",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 4.178923,
+        "std": 1.336645
+      }
+    },
+    {
+      "name": "f4",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 10.338837,
+        "std": 0.343308
+      }
+    },
+    {
+      "name": "f5",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 4.028513,
+        "std": 0.431097
+      }
+    },
+    {
+      "name": "f6",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": -4.155356,
+        "std": 4.577914
+      }
+    },
+    {
+      "name": "f7",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 5.101765,
+        "std": 1.205248
+      }
+    },
+    {
+      "name": "f8",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 3.933581,
+        "std": 0.056660
+      }
+    },
+    {
+      "name": "f9",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 16.027638,
+        "std": 7.018975
+      }
+    },
+    {
+      "name": "f10",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": 5.333396,
+        "std": 0.168229
+      }
+    },
+    {
+      "name": "f11",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float",
+      "normalize_fn": "z_score",
+      "normalize_fn_param": {
+        "mean": -0.170967,
+        "std": 0.022833
+      }
+    },
+    {
+      "name": "treatment",
+      "feature_type": "raw",
+      "input_size": 1,
+      "raw_data_type": "float"
+    }
+  ]
+}
