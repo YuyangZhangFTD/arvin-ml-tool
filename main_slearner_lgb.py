@@ -67,13 +67,13 @@ for _df, _name in zip([data_train, data_eval, data_test], ['train', 'eval', 'tes
 
     _df, qini_score = cal_qini_score(_df, score_col='_ite', treatment_col=IS_TREAT_COL, outcome_col=LABEL_COL)
 
-    plt.plot(_df['percentile'], _df['normal_total_lift'], label=f"{model_name}")
+    plt.plot(_df['percentile'], _df['normal_total_lift'], label=f"{_name}")
     result_str.append(f"{_name}={round(qini_score, 4)}")
 
 plt.legend()
 plt.xlabel('percentile')
 plt.ylabel(f'normalized uplift ({LABEL_COL})')
 plt.title(f"{model_name}: {','.join(result_str)}")
-plt.savefig(f"{model_name}.png")
-plt.show()
-data_test.to_csv(f"./criteo-uplift/pred_{eval_flag}_{model_name}.gz", index=None, compression='gzip')
+plt.savefig(f"qini_curve_{model_name}.png")
+# plt.show()
+# data_test.to_csv(f"./criteo-uplift/pred_{eval_flag}_{model_name}.gz", index=None, compression='gzip')

@@ -23,8 +23,8 @@ TOTAL_COLS = FEATURE_COLS + [IS_TREAT_COL, LABEL_COL, IS_VISIT_COL, IS_EXPOSURE_
 
 # 超参数
 VALID_SET_RATIO = 0.1
-EPOCH_NUM = 5
-BATCH_SIZE = 128
+EPOCH_NUM = 2
+BATCH_SIZE = 256
 HIDDEN_LAYER_NUM = [16, 4]
 LEARNING_RATE = 0.01
 
@@ -166,13 +166,13 @@ for _df, _name in zip([data_train, data_valid, data_test], ["train", "valid", "t
     _df, qini_score = cal_qini_score(_df, score_col="_ite", treatment_col=IS_TREAT_COL, outcome_col=LABEL_COL)
 
     plt.Figure()
-    plt.plot(_df["percentile"], _df["normal_total_lift"], label=f"{model_name}")
+    plt.plot(_df["percentile"], _df["normal_total_lift"], label=f"{_name}")
     result_str.append(f"{_name}={round(qini_score, 4)}")
 
 plt.legend()
 plt.xlabel('percentile')
 plt.ylabel(f'normalized uplift ({LABEL_COL})')
 plt.title(f"{model_name}: {','.join(result_str)}")
-plt.savefig(f"{model_name}.png")
-plt.show()
+plt.savefig(f"qini_curve_{model_name}.png")
+# plt.show()
 # data_test.to_csv(f"./criteo-uplift/pred_{eval_flag}_{model_name}.gz", index=None, compression="gzip")

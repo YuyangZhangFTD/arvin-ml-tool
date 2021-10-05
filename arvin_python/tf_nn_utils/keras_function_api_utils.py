@@ -41,6 +41,16 @@ def generate_feature_columns(feature_conf: dict = None):
                     boundaries=_feat_conf["bucket_boundaries"]
                 ), dimension=_feat_conf["embedding_size"]
             )
+        elif _feat_conf["feature_type"] == "embedding" \
+                and "input_size" in _feat_conf and _feat_conf["input_size"] == 1 \
+                and "bucket_boundaries" not in _feat_conf \
+                and "hash_bucket_size" in _feat_conf \
+                and "embedding_size" in _feat_conf:
+            feature_columns[_feat_conf["name"]] = tf.feature_column.embedding_column(
+                categorical_column=tf.feature_column.categorical_column_with_hash_bucket(
+                    key=_feat_conf["name"], hash_bucket_size=_feat_conf["hash_bucket_size"]
+                ), dimension=_feat_conf["embedding_size"]
+            )
         elif _feat_conf["feature_type"] == "raw":
             feature_columns[_feat_conf["name"]] = tf.feature_column.numeric_column(
                 _feat_conf["name"], shape=(_feat_conf["input_size"],),

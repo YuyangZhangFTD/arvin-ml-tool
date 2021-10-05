@@ -150,3 +150,6 @@ music/input/
 
 # nohup
 *.out
+
+# private
+didi-cheap/*
