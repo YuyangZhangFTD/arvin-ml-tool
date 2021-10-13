@@ -11,7 +11,7 @@ from arvin_python.causal_tool.metric.qini import cal_qini_score
 from arvin_python.tf_nn_utils.keras_function_api_utils import *
 
 eval_flag = 0
-model_name = "slearner_nn"
+model_name = "slearner_nn_hte"
 
 # 数据集相关
 IS_TREAT_COL = "treatment"  # treatment
@@ -62,10 +62,10 @@ def make_ds_from_df(
 #     )
 
 
-with open("tf_nn_conf/slearner_nn/feature_conf_raw.json") as f:
+with open(f"tf_nn_conf/{model_name}/feature_conf_raw.json") as f:
     feature_conf = json.load(f)["features"]
 
-with open("tf_nn_conf/slearner_nn/model_conf.json") as f:
+with open(f"tf_nn_conf/{model_name}/model_conf.json") as f:
     model_conf = json.load(f)
 
 feature_columns = generate_feature_columns(feature_conf)
@@ -76,6 +76,8 @@ block_layer_output = generate_feature_block_layer_output(
 
 # y = main_net_output + main_net_tau * trt = f(f0,...f11) + g(f0,...,f11) * trt
 tenser_in_main_net = block_layer_output["main_net"]
+tensor_in_is_trt = block_layer_output["is_trt"]
+
 for i, num in enumerate(HIDDEN_LAYER_NUM):
     tenser_in_main_net = keras.layers.Dense(
         units=num,
@@ -87,8 +89,9 @@ for i, num in enumerate(HIDDEN_LAYER_NUM):
     tenser_in_main_net = keras.layers.LeakyReLU(alpha=0.1)(tenser_in_main_net)  # 如果想使用leaky_relu，需要当成新layer使用
     tenser_in_main_net = keras.layers.Dropout(rate=0.2)(tenser_in_main_net)
 main_net_output = keras.layers.Dense(1, name="main_net_output")(tenser_in_main_net)
+main_net_tau = keras.layers.Dense(1, name="main_net_tau")(tenser_in_main_net)
 # keras.layers.Lambda(lambda x: x[0] + x[1] * x[2])([main_net_output, main_net_tau, tensor_in_is_trt])
-logit = main_net_output
+logit = main_net_output + main_net_tau * tensor_in_is_trt
 # keras.Model的outputs中的名字需要跟y中的名字一致
 prob = keras.layers.Lambda(function=tf.keras.activations.sigmoid, name=LABEL_COL)(logit)
 model = keras.Model(inputs=[v for v in feature_inputs.values()], outputs=prob)

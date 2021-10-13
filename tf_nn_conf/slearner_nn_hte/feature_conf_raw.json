@@ -134,11 +134,9 @@
     },
     {
       "name": "treatment",
-      "feature_type": "embedding",
+      "feature_type": "raw",
       "input_size": 1,
-      "raw_data_type": "int",
-      "max_index_num": 4,
-      "embedding_size": 1
+      "raw_data_type": "float"
     }
   ]
 }

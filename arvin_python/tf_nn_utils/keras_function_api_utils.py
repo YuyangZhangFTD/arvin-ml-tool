@@ -17,14 +17,17 @@ def _parse_normalize_fn(nf, param):
     if nf == "z_score":
         def _z_score(x):
             return (x - param["mean"]) / param["std"]
+
         return _z_score
     elif nf == "square":
         def _square(x):
             return x ** 2
+
         return _square
     else:
         def _fn(x):
             return x
+
         return _fn  # 直接 return None 会报错
 
 
@@ -49,6 +52,17 @@ def generate_feature_columns(feature_conf: dict = None):
             feature_columns[_feat_conf["name"]] = tf.feature_column.embedding_column(
                 categorical_column=tf.feature_column.categorical_column_with_hash_bucket(
                     key=_feat_conf["name"], hash_bucket_size=_feat_conf["hash_bucket_size"]
+                ), dimension=_feat_conf["embedding_size"]
+            )
+        elif _feat_conf["feature_type"] == "embedding" \
+                and "input_size" in _feat_conf and _feat_conf["input_size"] == 1 \
+                and "bucket_boundaries" not in _feat_conf \
+                and "hash_bucket_size" not in _feat_conf \
+                and "max_index_num" in _feat_conf \
+                and "embedding_size" in _feat_conf:
+            feature_columns[_feat_conf["name"]] = tf.feature_column.embedding_column(
+                categorical_column=tf.feature_column.categorical_column_with_identity(
+                    key=_feat_conf["name"], num_buckets=_feat_conf["max_index_num"]
                 ), dimension=_feat_conf["embedding_size"]
             )
         elif _feat_conf["feature_type"] == "raw":

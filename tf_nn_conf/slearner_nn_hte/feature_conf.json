@@ -96,7 +96,7 @@
       "bucket_boundaries": [-1.383940669255639,-0.1686792210005612],
       "embedding_size": 2
     },
-    {
+        {
       "name": "treatment",
       "feature_type": "raw",
       "input_size": 1,
